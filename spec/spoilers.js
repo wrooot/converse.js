@@ -99,7 +99,7 @@
             });
             _converse.connection._dataRecv(test_utils.createRequest(presence));
             await test_utils.openChatBoxFor(_converse, contact_jid);
-            await test_utils.waitUntilDiscoConfirmed(_converse, contact_jid+'/phone', [], [Strophe.NS.SPOILER]);
+            await test_utils.waitUntilDiscoConfirmed(contact_jid+'/phone', [], [Strophe.NS.SPOILER]);
             const view = _converse.api.chatviews.get(contact_jid);
             spyOn(_converse.connection, 'send');
 
@@ -172,7 +172,7 @@
             });
             _converse.connection._dataRecv(test_utils.createRequest(presence));
             await test_utils.openChatBoxFor(_converse, contact_jid);
-            await test_utils.waitUntilDiscoConfirmed(_converse, contact_jid+'/phone', [], [Strophe.NS.SPOILER]);
+            await test_utils.waitUntilDiscoConfirmed(contact_jid+'/phone', [], [Strophe.NS.SPOILER]);
             const view = _converse.chatboxviews.get(contact_jid);
 
             await u.waitUntil(() => view.el.querySelector('.toggle-compose-spoiler'));

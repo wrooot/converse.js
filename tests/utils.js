@@ -10,7 +10,7 @@
     const u = converse.env.utils;
     const utils = {};
 
-    utils.waitUntilDiscoConfirmed = async function (_converse, entity_jid, identities, features=[], items=[], type='info') {
+    utils.waitUntilDiscoConfirmed = async function (entity_jid, identities, features=[], items=[], type='info') {
         const iq = await u.waitUntil(() => {
             return _.filter(
                 _converse.connection.IQ_stanzas,

@@ -23,11 +23,10 @@
             expect(_converse.session.get('push_enabled')).toBeFalsy();
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.push_app_servers[0].jid,
+                _converse.push_app_servers[0].jid,
                 [{'category': 'pubsub', 'type':'push'}],
                 ['urn:xmpp:push:0'], [], 'info');
             await test_utils.waitUntilDiscoConfirmed(
-                    _converse,
                     _converse.bare_jid,
                     [{'category': 'account', 'type':'registered'}],
                     ['urn:xmpp:push:0'], [], 'info');
@@ -61,12 +60,10 @@
             const IQ_stanzas = _converse.connection.IQ_stanzas;
             const room_jid = 'coven@chat.shakespeare.lit';
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.push_app_servers[0].jid,
+                _converse.push_app_servers[0].jid,
                 [{'category': 'pubsub', 'type':'push'}],
                 ['urn:xmpp:push:0'], [], 'info');
-            await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid, [],
-                ['urn:xmpp:push:0']);
+            await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, [], ['urn:xmpp:push:0']);
 
             let iq = await u.waitUntil(() => _.filter(
                 IQ_stanzas,
@@ -87,7 +84,7 @@
 
             test_utils.openAndEnterChatRoom(_converse, 'coven@chat.shakespeare.lit', 'oldhag');
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, 'chat.shakespeare.lit',
+                'chat.shakespeare.lit',
                 [{'category': 'account', 'type':'registered'}],
                 ['urn:xmpp:push:0'], [], 'info');
             iq = await u.waitUntil(() => _.filter(
@@ -123,7 +120,6 @@
             expect(_converse.session.get('push_enabled')).toBeFalsy();
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse,
                 _converse.bare_jid,
                 [{'category': 'account', 'type':'registered'}],
                 ['urn:xmpp:push:0'], [], 'info');
@@ -159,11 +155,10 @@
             expect(_converse.session.get('push_enabled')).toBeFalsy();
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.push_app_servers[0].jid,
+                _converse.push_app_servers[0].jid,
                 [{'category': 'pubsub', 'type':'push'}],
                 ['urn:xmpp:push:0'], [], 'info');
             await test_utils.waitUntilDiscoConfirmed(
-                    _converse,
                     _converse.bare_jid,
                     [{'category': 'account', 'type':'registered'}],
                     ['urn:xmpp:push:0'], [], 'info');

@@ -37,7 +37,7 @@
 
     async function initializedOMEMO (_converse) {
         await test_utils.waitUntilDiscoConfirmed(
-            _converse, _converse.bare_jid,
+            _converse.bare_jid,
             [{'category': 'pubsub', 'type': 'pep'}],
             ['http://jabber.org/protocol/pubsub#publish-options']
         );
@@ -384,7 +384,7 @@
                 null, ['rosterGroupsFetched', 'chatBoxesFetched'], {},
                 async function (done, _converse) {
 
-            await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, [], [Strophe.NS.SID]);
+            await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, [], [Strophe.NS.SID]);
 
             let sent_stanza;
             test_utils.createContacts(_converse, 'current', 1);
@@ -707,7 +707,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -881,7 +881,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -1031,7 +1031,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -1110,7 +1110,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -1275,7 +1275,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -1457,7 +1457,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );

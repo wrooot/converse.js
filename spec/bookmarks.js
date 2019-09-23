@@ -23,7 +23,7 @@
             async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -149,7 +149,7 @@
             async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -193,7 +193,7 @@
                 async function (done, _converse) {
 
                 await test_utils.waitUntilDiscoConfirmed(
-                    _converse, _converse.bare_jid,
+                    _converse.bare_jid,
                     [{'category': 'pubsub', 'type': 'pep'}],
                     ['http://jabber.org/protocol/pubsub#publish-options']
                 );
@@ -218,7 +218,7 @@
                 async function (done, _converse) {
 
                 test_utils.waitUntilDiscoConfirmed(
-                    _converse, _converse.bare_jid,
+                    _converse.bare_jid,
                     [{'category': 'pubsub', 'type': 'pep'}],
                     ['http://jabber.org/protocol/pubsub#publish-options']
                 );
@@ -248,7 +248,7 @@
                 let sent_stanza, IQ_id;
 
                 await test_utils.waitUntilDiscoConfirmed(
-                    _converse, _converse.bare_jid,
+                    _converse.bare_jid,
                     [{'category': 'pubsub', 'type': 'pep'}],
                     ['http://jabber.org/protocol/pubsub#publish-options']
                 );
@@ -352,7 +352,7 @@
             async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -410,7 +410,7 @@
             async function (done, _converse) {
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );
@@ -501,7 +501,7 @@
                 async function (done, _converse) {
 
                 await test_utils.waitUntilDiscoConfirmed(
-                    _converse, _converse.bare_jid,
+                    _converse.bare_jid,
                     [{'category': 'pubsub', 'type': 'pep'}],
                     ['http://jabber.org/protocol/pubsub#publish-options']
                 );
@@ -590,7 +590,7 @@
 
                 test_utils.openControlBox();
                 await test_utils.waitUntilDiscoConfirmed(
-                    _converse, _converse.bare_jid,
+                    _converse.bare_jid,
                     [{'category': 'pubsub', 'type': 'pep'}],
                     ['http://jabber.org/protocol/pubsub#publish-options']
                 );
@@ -660,7 +660,7 @@
             test_utils.openControlBox();
             const jid = 'room@conference.example.org';
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type': 'pep'}],
                 ['http://jabber.org/protocol/pubsub#publish-options']
             );

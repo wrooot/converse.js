@@ -25,5 +25,14 @@
           <h2 id="project_tagline">Tests</h2>
         </header>
     </div>
+
+    <script>
+        converse.plugins.add('converse-tests', {
+            initialize () {
+                const { _converse } = this;
+                window._converse = _converse;
+            }
+        });
+    </script>
 </body>
 </html>

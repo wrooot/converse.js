@@ -1316,7 +1316,7 @@
                     null, ['rosterGroupsFetched'], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, 'montague.lit', [], ['vcard-temp']);
+                await test_utils.waitUntilDiscoConfirmed('montague.lit', [], ['vcard-temp']);
                 await u.waitUntil(() => _converse.xmppstatus.vcard.get('fullname'));
                 test_utils.createContacts(_converse, 'current');
                 await test_utils.openAndEnterChatRoom(_converse, 'lounge@montague.lit', 'romeo');

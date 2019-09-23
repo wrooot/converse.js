@@ -55,7 +55,7 @@
                     async function (done, _converse) {
 
                 let contact, sent_stanza, IQ_id, stanza;
-                await test_utils.waitUntilDiscoConfirmed(_converse, 'montague.lit', [], ['vcard-temp']);
+                await test_utils.waitUntilDiscoConfirmed('montague.lit', [], ['vcard-temp']);
                 await u.waitUntil(() => _converse.xmppstatus.vcard.get('fullname'), 300);
                 /* The process by which a user subscribes to a contact, including
                  * the interaction between roster items and subscription states.

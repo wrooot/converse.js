@@ -18,7 +18,7 @@
             it("is done automatically", mock.initConverse(async (done, _converse) => {
                 const IQ_stanzas = _converse.connection.IQ_stanzas;
                 const IQ_ids =  _converse.connection.IQ_ids;
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, [], []);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, [], []);
                 await u.waitUntil(() => _.filter(
                     IQ_stanzas,
                     iq => iq.querySelector('iq[to="montague.lit"] query[xmlns="http://jabber.org/protocol/disco#info"]')).length
@@ -180,11 +180,11 @@
                     const contact_jid = mock.cur_names[0].replace(/ /g,'.').toLowerCase() + '@montague.lit';
                     await test_utils.openChatBoxFor(_converse, contact_jid);
                     await test_utils.waitUntilDiscoConfirmed(
-                        _converse, _converse.domain,
+                        _converse.domain,
                         [{'category': 'server', 'type':'IM'}],
                         ['http://jabber.org/protocol/disco#items'], [], 'info');
 
-                    await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], [], 'items');
+                    await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], [], 'items');
                     const view = _converse.chatboxviews.get(contact_jid);
                     expect(view.el.querySelector('.chat-toolbar .upload-file')).toBe(null);
                     done();
@@ -196,12 +196,12 @@
 
                     await test_utils.openAndEnterChatRoom(_converse, 'lounge@montague.lit', 'romeo');
                     test_utils.waitUntilDiscoConfirmed(
-                        _converse, _converse.domain,
+                        _converse.domain,
                         [{'category': 'server', 'type':'IM'}],
                         ['http://jabber.org/protocol/disco#items'], [], 'info');
 
-                    await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], ['upload.montague.lit'], 'items');
-                    await test_utils.waitUntilDiscoConfirmed(_converse, 'upload.montague.lit', [], [Strophe.NS.HTTPUPLOAD], []);
+                    await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], ['upload.montague.lit'], 'items');
+                    await test_utils.waitUntilDiscoConfirmed('upload.montague.lit', [], [Strophe.NS.HTTPUPLOAD], []);
                     const view = _converse.chatboxviews.get('lounge@montague.lit');
                     expect(view.el.querySelector('.chat-toolbar .upload-file')).toBe(null);
                     done();
@@ -216,12 +216,12 @@
 
                 it("appears in private chats", mock.initConverse(async (done, _converse) => {
                     await test_utils.waitUntilDiscoConfirmed(
-                        _converse, _converse.domain,
+                        _converse.domain,
                         [{'category': 'server', 'type':'IM'}],
                         ['http://jabber.org/protocol/disco#items'], [], 'info');
 
-                    await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], ['upload.montague.lit'], 'items')
-                    await test_utils.waitUntilDiscoConfirmed(_converse, 'upload.montague.lit', [], [Strophe.NS.HTTPUPLOAD], []);
+                    await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], ['upload.montague.lit'], 'items')
+                    await test_utils.waitUntilDiscoConfirmed('upload.montague.lit', [], [Strophe.NS.HTTPUPLOAD], []);
                     test_utils.createContacts(_converse, 'current', 3);
                     _converse.api.trigger('rosterContactsFetched');
                     const contact_jid = mock.cur_names[2].replace(/ /g,'.').toLowerCase() + '@montague.lit';
@@ -237,12 +237,12 @@
                         async (done, _converse) => {
 
                     await test_utils.waitUntilDiscoConfirmed(
-                        _converse, _converse.domain,
+                        _converse.domain,
                         [{'category': 'server', 'type':'IM'}],
                         ['http://jabber.org/protocol/disco#items'], [], 'info');
 
-                    await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], ['upload.montague.lit'], 'items');
-                    await test_utils.waitUntilDiscoConfirmed(_converse, 'upload.montague.lit', [], [Strophe.NS.HTTPUPLOAD], []);
+                    await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], ['upload.montague.lit'], 'items');
+                    await test_utils.waitUntilDiscoConfirmed('upload.montague.lit', [], [Strophe.NS.HTTPUPLOAD], []);
                     await test_utils.openAndEnterChatRoom(_converse, 'lounge@montague.lit', 'romeo');
                     await u.waitUntil(() => _converse.chatboxviews.get('lounge@montague.lit').el.querySelector('.upload-file'));
                     const view = _converse.chatboxviews.get('lounge@montague.lit');
@@ -255,15 +255,15 @@
                     it("is uploaded and sent out", mock.initConverse(async (done, _converse) => {
                         const base_url = 'https://conversejs.org';
                         await test_utils.waitUntilDiscoConfirmed(
-                            _converse, _converse.domain,
+                            _converse.domain,
                             [{'category': 'server', 'type':'IM'}],
                             ['http://jabber.org/protocol/disco#items'], [], 'info');
 
                         const send_backup = XMLHttpRequest.prototype.send;
                         const IQ_stanzas = _converse.connection.IQ_stanzas;
 
-                        await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], ['upload.montague.tld'], 'items');
-                        await test_utils.waitUntilDiscoConfirmed(_converse, 'upload.montague.tld', [], [Strophe.NS.HTTPUPLOAD], []);
+                        await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], ['upload.montague.tld'], 'items');
+                        await test_utils.waitUntilDiscoConfirmed('upload.montague.tld', [], [Strophe.NS.HTTPUPLOAD], []);
                         test_utils.createContacts(_converse, 'current');
                         _converse.api.trigger('rosterContactsFetched');
                         const contact_jid = mock.cur_names[2].replace(/ /g,'.').toLowerCase() + '@montague.lit';
@@ -360,15 +360,15 @@
 
                         const base_url = 'https://conversejs.org';
                         await test_utils.waitUntilDiscoConfirmed(
-                            _converse, _converse.domain,
+                            _converse.domain,
                             [{'category': 'server', 'type':'IM'}],
                             ['http://jabber.org/protocol/disco#items'], [], 'info');
 
                         const send_backup = XMLHttpRequest.prototype.send;
                         const IQ_stanzas = _converse.connection.IQ_stanzas;
 
-                        await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], ['upload.montague.tld'], 'items');
-                        await test_utils.waitUntilDiscoConfirmed(_converse, 'upload.montague.tld', [], [Strophe.NS.HTTPUPLOAD], []);
+                        await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], ['upload.montague.tld'], 'items');
+                        await test_utils.waitUntilDiscoConfirmed('upload.montague.tld', [], [Strophe.NS.HTTPUPLOAD], []);
                         await test_utils.openAndEnterChatRoom(_converse, 'lounge@montague.lit', 'romeo');
 
                         // Wait until MAM query has been sent out
@@ -471,7 +471,7 @@
                         const IQ_ids =  _converse.connection.IQ_ids;
                         const send_backup = XMLHttpRequest.prototype.send;
 
-                        await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, [], []);
+                        await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, [], []);
                         await u.waitUntil(() => _.filter(
                             IQ_stanzas,
                             iq => iq.querySelector('iq[to="montague.lit"] query[xmlns="http://jabber.org/protocol/disco#info"]')).length
@@ -599,8 +599,8 @@
                     const send_backup = XMLHttpRequest.prototype.send;
                     const IQ_stanzas = _converse.connection.IQ_stanzas;
 
-                    await test_utils.waitUntilDiscoConfirmed(_converse, _converse.domain, [], [], ['upload.montague.tld'], 'items');
-                    await test_utils.waitUntilDiscoConfirmed(_converse, 'upload.montague.tld', [], [Strophe.NS.HTTPUPLOAD], []);
+                    await test_utils.waitUntilDiscoConfirmed(_converse.domain, [], [], ['upload.montague.tld'], 'items');
+                    await test_utils.waitUntilDiscoConfirmed('upload.montague.tld', [], [Strophe.NS.HTTPUPLOAD], []);
                     test_utils.createContacts(_converse, 'current');
                     _converse.api.trigger('rosterContactsFetched');
                     const contact_jid = mock.cur_names[2].replace(/ /g,'.').toLowerCase() + '@montague.lit';

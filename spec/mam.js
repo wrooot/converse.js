@@ -218,7 +218,7 @@
                     await test_utils.waitForRoster(_converse, 'current', 1);
                     const contact_jid = mock.cur_names[0].replace(/ /g,'.').toLowerCase() + '@montague.lit';
                     await test_utils.openChatBoxFor(_converse, contact_jid);
-                    await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                    await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                     const sent_IQs = _converse.connection.IQ_stanzas;
                     const stanza = await u.waitUntil(() => sent_IQs.filter(iq => iq.querySelector(`iq[type="set"] query[xmlns="${Strophe.NS.MAM}"]`)).pop());
                     const queryid = stanza.querySelector('query').getAttribute('queryid');
@@ -413,7 +413,7 @@
                     async function (done, _converse) {
 
                 const sendIQ = _converse.connection.sendIQ;
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
                     sent_stanza = iq;
@@ -432,7 +432,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -465,7 +465,7 @@
 
                 const room_jid = 'coven@chat.shakespeare.lit';
                 _converse.api.archive.query({'with': room_jid, 'groupchat': true});
-                await test_utils.waitUntilDiscoConfirmed(_converse, room_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(room_jid, null, [Strophe.NS.MAM]);
 
                 const sent_stanzas = _converse.connection.sent_stanzas;
                 const stanza = await u.waitUntil(
@@ -493,7 +493,7 @@
                 const room_jid = 'coven@chat.shakespeare.lit';
                 const promise = _converse.api.archive.query({'with': room_jid, 'groupchat': true, 'max':'10'});
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, room_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(room_jid, null, [Strophe.NS.MAM]);
 
                 const sent_stanzas = _converse.connection.sent_stanzas;
                 const sent_stanza = await u.waitUntil(
@@ -561,7 +561,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -601,7 +601,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 try {
                     await _converse.api.archive.query({'start': 'not a real date'});
                 } catch (e) {
@@ -615,7 +615,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -651,7 +651,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -687,7 +687,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -727,7 +727,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -759,7 +759,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -803,7 +803,7 @@
                     null, [], {},
                     async function (done, _converse) {
 
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
                 spyOn(_converse.connection, 'sendIQ').and.callFake(function (iq, callback, errback) {
@@ -977,7 +977,7 @@
                 await test_utils.waitForRoster(_converse, 'current', 1);
                 const contact_jid = mock.cur_names[0].replace(/ /g,'.').toLowerCase() + '@montague.lit';
                 await test_utils.openChatBoxFor(_converse, contact_jid);
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
 
                 let sent_stanza, IQ_id;
                 const sendIQ = _converse.connection.sendIQ;
@@ -1055,7 +1055,7 @@
                 await test_utils.waitForRoster(_converse, 'current', 1);
                 const contact_jid = mock.cur_names[0].replace(/ /g,'.').toLowerCase() + '@montague.lit';
                 await test_utils.openChatBoxFor(_converse, contact_jid);
-                await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, null, [Strophe.NS.MAM]);
+                await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, null, [Strophe.NS.MAM]);
 
                 const IQ_stanzas = _converse.connection.IQ_stanzas;
                 let sent_stanza = await u.waitUntil(() => IQ_stanzas.filter(iq => sizzle('query[xmlns="urn:xmpp:mam:2"]', iq).length).pop());

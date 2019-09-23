@@ -603,7 +603,7 @@
                 null, ['rosterGroupsFetched'], {},
                 async function (done, _converse) {
 
-            await test_utils.waitUntilDiscoConfirmed(_converse, 'montague.lit', [], ['vcard-temp']);
+            await test_utils.waitUntilDiscoConfirmed('montague.lit', [], ['vcard-temp']);
             await test_utils.waitForRoster(_converse, 'current');
             test_utils.openControlBox();
 
@@ -2153,7 +2153,7 @@
                 async function (done, _converse) {
 
             await test_utils.waitForRoster(_converse, 'current', 1);
-            await test_utils.waitUntilDiscoConfirmed(_converse, _converse.bare_jid, [], [Strophe.NS.SID]);
+            await test_utils.waitUntilDiscoConfirmed(_converse.bare_jid, [], [Strophe.NS.SID]);
 
             const contact_jid = mock.cur_names[0].replace(/ /g,'.').toLowerCase() + '@montague.lit';
             await test_utils.openChatBoxFor(_converse, contact_jid);

@@ -195,12 +195,13 @@
             'i18n': 'en',
             'auto_subscribe': false,
             'play_sounds': false,
+            'animate': false,
             'bosh_service_url': 'montague.lit/http-bind',
             'connection': connection,
-            'animate': false,
-            'use_emojione': false,
             'no_trimming': true,
+            'use_emojione': false,
             'view_mode': mock.view_mode,
+            'whitelisted_plugins': ['converse-tests'],
             'debug': false
         }, settings || {}));
 

@@ -77,7 +77,7 @@
             spyOn(_converse.Bookmarks.prototype, 'fetchBookmarks').and.callThrough();
 
             await test_utils.waitUntilDiscoConfirmed(
-                _converse, _converse.bare_jid,
+                _converse.bare_jid,
                 [{'category': 'pubsub', 'type':'pep'}],
                 [`${Strophe.NS.PUBSUB}#publish-options`]
             );

@@ -55,7 +55,7 @@
                     async function (done, _converse) {
 
                 await test_utils.waitForRoster(_converse, 'current');
-                await test_utils.waitUntilDiscoConfirmed(_converse, 'montague.lit', [], ['vcard-temp']);
+                await test_utils.waitUntilDiscoConfirmed('montague.lit', [], ['vcard-temp']);
                 await u.waitUntil(() => _converse.xmppstatus.vcard.get('fullname'));
                 await test_utils.openControlBox();
                 expect(_converse.chatboxes.length).toEqual(1);
@@ -759,7 +759,7 @@
                             async function (done, _converse) {
 
                         let contact, sent_stanza, IQ_id, stanza;
-                        await test_utils.waitUntilDiscoConfirmed(_converse, 'montague.lit', [], ['vcard-temp']);
+                        await test_utils.waitUntilDiscoConfirmed('montague.lit', [], ['vcard-temp']);
                         await u.waitUntil(() => _converse.xmppstatus.vcard.get('fullname'));
                         await test_utils.waitForRoster(_converse, 'current');
                         // Send a message from a different resource
@@ -887,7 +887,7 @@
                             async function (done, _converse) {
 
                         let contact, sent_stanza, IQ_id, stanza;
-                        await test_utils.waitUntilDiscoConfirmed(_converse, 'montague.lit', [], ['vcard-temp']);
+                        await test_utils.waitUntilDiscoConfirmed('montague.lit', [], ['vcard-temp']);
                         await u.waitUntil(() => _converse.xmppstatus.vcard.get('fullname'));
                         await test_utils.waitForRoster(_converse, 'current');
                         // Send a message from a different resource
