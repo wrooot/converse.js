@@ -1261,8 +1261,8 @@ converse.plugins.add('converse-omemo', {
                      */
                     'generate': async () => {
                         // Remove current device
-                        const devicelist = _converse.devicelists.get(_converse.bare_jid),
-                              device_id = _converse.omemo_store.get('device_id');
+                        const devicelist = _converse.devicelists.get(_converse.bare_jid);
+                        const device_id = _converse.omemo_store.get('device_id');
                         if (device_id) {
                             const device = devicelist.devices.get(device_id);
                             _converse.omemo_store.unset(device_id);

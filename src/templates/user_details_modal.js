@@ -1,7 +1,9 @@
-import { __ } from '@converse/headless/i18n';
-import { html } from "lit-html";
 import avatar from "./avatar.js";
+import { __ } from '@converse/headless/i18n';
+import { api } from "@converse/headless/converse-core";
+import { html } from "lit-html";
 import { modal_close_button, modal_header_close_button } from "./buttons"
+import { until } from 'lit-html/directives/until.js';
 
 
 const i18n_address = __('XMPP Address');
@@ -47,7 +49,9 @@ const device_fingerprint = (o) => {
 }
 
 
-const fingerprints = (o) => {
+const fingerprints = async (o) => {
+    debugger;
+    await api.waitUntil('OMEMOInitialized');
     const devices = o.view.devicelist.devices;
     return html`
         <hr/>
@@ -85,7 +89,7 @@ export default (o) => html`
                 ${ o.email ? html`<p><label>${i18n_email}:</label> <a href="mailto:${o.email}">${o.email}</a></p>` : '' }
                 ${ o.role ? html`<p><label>${i18n_role}:</label> ${o.role}</p>` : '' }
 
-                ${ (o._converse.pluggable.plugins['converse-omemo'].enabled(o._converse)) ? fingerprints(o) : '' }
+                ${ (o._converse.pluggable.plugins['converse-omemo'].enabled(o._converse)) ? until(fingerprints(o),  '') : '' }
             </div>
             <div class="modal-footer">
                 ${modal_close_button}

@@ -576,7 +576,7 @@ u.isInDOM = function (el) {
 }
 
 u.isVisible = function (el) {
-    if (el === null) {
+    if (!el) {
         return false;
     }
     if (u.hasClass('hidden', el)) {

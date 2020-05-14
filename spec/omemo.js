@@ -69,7 +69,7 @@ async function initializedOMEMO (_converse) {
 }
 
 
-describe("The OMEMO module", function() {
+fdescribe("The OMEMO module", function() {
 
     it("adds methods for encrypting and decrypting messages via AES GCM",
         mock.initConverse(
@@ -1438,7 +1438,7 @@ describe("The OMEMO module", function() {
     }));
 
 
-    it("shows OMEMO device fingerprints in the user details modal",
+    fit("shows OMEMO device fingerprints in the user details modal",
         mock.initConverse(
             ['rosterGroupsFetched', 'chatBoxesFetched'], {},
             async function (done, _converse) {

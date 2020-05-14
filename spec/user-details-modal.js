@@ -45,11 +45,11 @@ describe("The User Details Modal", function () {
         const view = _converse.chatboxviews.get(contact_jid);
         let show_modal_button = view.el.querySelector('.show-user-details-modal');
         show_modal_button.click();
-        const modal = view.user_details_modal;
-        await u.waitUntil(() => u.isVisible(modal.el), 2000);
+        await u.waitUntil(() => u.isVisible(view.user_details_modal?.el), 2000);
         spyOn(window, 'confirm').and.returnValue(true);
 
         spyOn(view.model.contact, 'removeFromRoster').and.callFake((callback, errback) => errback());
+        const modal = view.user_details_modal;
         let remove_contact_button = modal.el.querySelector('button.remove-contact');
         expect(u.isVisible(remove_contact_button)).toBeTruthy();
         remove_contact_button.click();
