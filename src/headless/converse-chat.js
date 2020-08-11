@@ -193,11 +193,15 @@ converse.plugins.add('converse-chat', {
                 return text.startsWith('/me ');
             },
 
+            /**
+             * Sends out an IQ stanza to request a file upload slot.
+             * https://xmpp.org/extensions/xep-0363.html#request
+             * @private
+             * @method _converse.Message#sendSlotRequestStanza
+             * @returns { Promise<XMLElement>|Promise<_converse.TimeoutError> } A promise
+             *  which resolves with the IQ result or a {@link _converse.TimeoutError}.
+             */
             sendSlotRequestStanza () {
-                /* Send out an IQ stanza to request a file upload slot.
-                 *
-                 * https://xmpp.org/extensions/xep-0363.html#request
-                 */
                 if (!this.file) {
                     return Promise.reject(new Error("file is undefined"));
                 }
