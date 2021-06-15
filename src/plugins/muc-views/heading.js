@@ -1,48 +1,52 @@
 import ChatHeading from 'plugins/chatview/heading.js';
 import MUCInviteModal from 'modals/muc-invite.js';
 import RoomDetailsModal from 'modals/muc-details.js';
-import debounce from 'lodash-es/debounce';
 import tpl_muc_head from './templates/muc-head.js';
 import { Model } from '@converse/skeletor/src/model.js';
 import { __ } from 'i18n';
 import { _converse, api, converse } from "@converse/headless/core";
 import { destroyMUC, showModeratorToolsModal } from './utils.js';
-import {
-    getHeadingDropdownItem,
-    getHeadingStandaloneButton,
-} from 'plugins/chatview/utils.js';
 
 import './styles/muc-head.scss';
 
 
 export default class MUCHeading extends ChatHeading {
 
-    async connectedCallback () {
+    connectedCallback () {
         super.connectedCallback();
+        this.initialize();
+    }
+
+    async initialize () {
         this.model = _converse.chatboxes.get(this.getAttribute('jid'));
-        this.debouncedRender = debounce(this.render, 100);
-        this.listenTo(this.model, 'change', this.debouncedRender);
+        this.listenTo(this.model, 'change', this.requestUpdate);
 
         const user_settings = await _converse.api.user.settings.getModel();
-        this.listenTo(user_settings, 'change:mucs_with_hidden_subject', this.debouncedRender);
+        this.listenTo(user_settings, 'change:mucs_with_hidden_subject', this.requestUpdate);
 
         await this.model.initialized;
-        this.listenTo(this.model.features, 'change:open', this.debouncedRender);
+        this.listenTo(this.model.features, 'change:open', this.requestUpdate);
         this.model.occupants.forEach(o => this.onOccupantAdded(o));
         this.listenTo(this.model.occupants, 'add', this.onOccupantAdded);
         this.listenTo(this.model.occupants, 'change:affiliation', this.onOccupantAffiliationChanged);
-        this.render();
+    }
+
+    render () {
+        return tpl_muc_head(Object.assign(this.model.toJSON(), {
+            'heading_buttons_promise': this.getHeadingButtons(subject_hidden),
+            'model': this.model
+        }));
     }
 
     onOccupantAdded (occupant) {
         if (occupant.get('jid') === _converse.bare_jid) {
-            this.debouncedRender();
+            this.requestUpdate();
         }
     }
 
     onOccupantAffiliationChanged (occupant) {
         if (occupant.get('jid') === _converse.bare_jid) {
-            this.debouncedRender();
+            this.requestUpdate();
         }
     }
 
@@ -168,25 +172,6 @@ export default class MUCHeading extends ChatHeading {
         } else {
             return buttons; // Happens during tests
         }
-    }
-
-    /**
-     * Returns the groupchat heading TemplateResult to be rendered.
-     */
-    async generateHeadingTemplate () {
-        const subject_hidden = await this.model.isSubjectHidden();
-        const heading_btns = await this.getHeadingButtons(subject_hidden);
-        const standalone_btns = heading_btns.filter(b => b.standalone);
-        const dropdown_btns = heading_btns.filter(b => !b.standalone);
-        return tpl_muc_head(
-            Object.assign(this.model.toJSON(), {
-                _converse,
-                subject_hidden,
-                'dropdown_btns': dropdown_btns.map(b => getHeadingDropdownItem(b)),
-                'standalone_btns': standalone_btns.map(b => getHeadingStandaloneButton(b)),
-                'title': this.model.getDisplayName()
-            })
-        );
     }
 }
 
