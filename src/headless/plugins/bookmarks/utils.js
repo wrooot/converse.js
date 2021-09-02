@@ -14,7 +14,8 @@ export async function initBookmarks () {
     if (!api.settings.get('allow_bookmarks')) {
         return;
     }
-    if (await checkBookmarksSupport()) {
+    const isBookmarksSupported = await checkBookmarksSupport();
+    if (isBookmarksSupported) {
         _converse.bookmarks = new _converse.Bookmarks();
         await _converse.bookmarks.fetchBookmarks();
         /**

@@ -167,7 +167,8 @@ export async function sendEnableStanza () {
     if (!api.settings.get('enable_smacks') || _converse.session.get('smacks_enabled')) {
         return;
     }
-    if (await isStreamManagementSupported()) {
+    const supported = await isStreamManagementSupported();
+    if (supported) {
         const promise = getOpenPromise();
         _converse.connection._addSysHandler(el => promise.resolve(saveSessionData(el)), Strophe.NS.SM, 'enabled');
         _converse.connection._addSysHandler(el => promise.resolve(onFailedStanza(el)), Strophe.NS.SM, 'failed');

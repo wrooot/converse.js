@@ -123,17 +123,18 @@ class MessageActions extends CustomElement {
                 'not yet support retractions and that this message may not ' +
                 'be removed everywhere.'
         );
-
+        const mayBeModerated = await this.model.mayBeModerated();
         if (this.model.mayBeRetracted()) {
             const messages = [__('Are you sure you want to retract this message?')];
             if (api.settings.get('show_retraction_warning')) {
                 messages[1] = retraction_warning;
             }
-            if (await api.confirm(__('Confirm'), messages)) {
+            const confirm = await api.confirm(__('Confirm'), messages);
+            if (confirm) {
                 const chatbox = this.model.collection.chatbox;
                 chatbox.retractOwnMessage(this.model);
             }
-        } else if (await this.model.mayBeModerated()) {
+        } else if (mayBeModerated) {
             if (this.model.get('sender') === 'me') {
                 let messages = [__('Are you sure you want to retract this message?')];
                 if (api.settings.get('show_retraction_warning')) {

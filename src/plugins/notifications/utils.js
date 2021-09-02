@@ -249,7 +249,8 @@ function playSoundNotification () {
  * to play sounds and show HTML5 notifications.
  */
 export async function handleMessageNotification (data) {
-    if (!await shouldNotifyOfMessage(data)) {
+    const shouldNotify = await shouldNotifyOfMessage(data);
+    if (!shouldNotify) {
         return false;
     }
     /**

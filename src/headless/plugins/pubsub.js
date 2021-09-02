@@ -53,7 +53,8 @@ converse.plugins.add('converse-pubsub', {
 
                     if (options) {
                         jid = jid || _converse.bare_jid;
-                        if (await api.disco.supports(Strophe.NS.PUBSUB + '#publish-options', jid)) {
+                        const supported = await api.disco.supports(Strophe.NS.PUBSUB + '#publish-options', jid);
+                        if (supported) {
                             stanza.c('publish-options')
                                 .c('x', {'xmlns': Strophe.NS.XFORM, 'type': 'submit'})
                                     .c('field', {'var': 'FORM_TYPE', 'type': 'hidden'})

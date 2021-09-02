@@ -310,7 +310,8 @@ export const api = _converse.api = {
             // See whether there is a BOSH session to re-attach to
             const bosh_plugin = _converse.pluggable.plugins['converse-bosh'];
             if (bosh_plugin && bosh_plugin.enabled()) {
-                if (await _converse.restoreBOSHSession()) {
+                const restore = await _converse.restoreBOSHSession();
+                if (restore) {
                     return;
                 } else if (api.settings.get("authentication") === _converse.PREBIND && (!automatic || api.settings.get("auto_login"))) {
                     return _converse.startNewPreboundBOSHSession();

@@ -1754,7 +1754,8 @@ const ChatRoomMixin = {
                 ) {
                     this.createMessage({ message, 'nick': attrs.nick, 'type': 'info' });
                 }
-                if (await this.isSubjectHidden()) {
+                const isSubjectHidden = await this.isSubjectHidden();
+                if (isSubjectHidden) {
                     this.toggleSubjectHiddenState();
                 }
             }
