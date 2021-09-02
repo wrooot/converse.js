@@ -186,7 +186,8 @@ export async function enableStreamManagement () {
     if (!api.settings.get('enable_smacks')) {
         return;
     }
-    if (!(await isStreamManagementSupported())) {
+    const isStreamMgmtSupported = await isStreamManagementSupported();
+    if (!isStreamMgmtSupported) {
         return;
     }
     const conn = _converse.connection;
