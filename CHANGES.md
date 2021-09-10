@@ -3,6 +3,14 @@
 ## 8.0.0 (Unreleased)
 
 - Requires Node 12 or above
+- #2326: 404 for asset /logo/conversejs-filled.svg
+- #2628: Open groupchats toggle emits an error
+- #2629: OMEMO button tooltip is wrong in private chat
+- #2633: Excessive logging of warning
+- #2634: Image previews not loading when not serving Converse locally
+- #2636: Don't fail when setting up a new XEP-0198 managed stream and `_converse.session` is undefined
+- Bugfix: Don't show minimized chats when logged out
+- #2640: Adds `beforeFetchLoginCredentials` hook
 
 ### Issues and features
 
