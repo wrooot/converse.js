@@ -3,13 +3,13 @@ import tpl_user_settings_modal from "./templates/user-settings.js";
 
 let _converse;
 
-export default BootstrapModal.extend({
-    id: "converse-client-info-modal",
+export default class UserSettingsModal extends BootstrapModal {
+    id = "converse-client-info-modal";
 
     initialize (settings) {
         _converse  = settings._converse;
         BootstrapModal.prototype.initialize.apply(this, arguments);
-    },
+    }
 
     toHTML () {
         return tpl_user_settings_modal(
@@ -20,4 +20,4 @@ export default BootstrapModal.extend({
             )
         );
     }
-});
+}

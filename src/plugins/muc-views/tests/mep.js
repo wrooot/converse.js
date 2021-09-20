@@ -4,6 +4,28 @@ const { u } = converse.env;
 
 describe("A XEP-0316 MEP notification", function () {
 
+
+    <message xmlns="jabber:client" to="1d17a8b3-4f31-465e-b8e6-871de7380453@staging-chat.cryptowat.ch/converse.js-126283591" id="h8UPgbb1avp3aAXr" from="ta@staging-muc.cryptowat.ch" type="groupchat">
+        <store xmlns="urn:xmpp:hints"/>
+        <event xmlns="http://jabber.org/protocol/pubsub#event">
+            <items node="urn:ietf:params:xml:ns:conference-info">
+                <item id="DdJmAYtpZxZ7-Czb">
+                    <conference-info xmlns="urn:ietf:params:xml:ns:conference-info">
+                        <activity xmlns="http://jabber.org/protocol/activity">
+                            <other/><text id="activity-text">An anonymous user has tipped SeveFP 10 credits</text>
+                            <reason>Go buy yourself something nice</reason>
+                            <reference xmlns="urn:xmpp:reference:0" begin="31" uri="xmpp:ta@staging-muc.cryptowat.ch/SeveFP" end="6" anchor="activity-text" type="mention"/>
+                            <markable xmlns="urn:xmpp:chat-markers:0"/>
+                        </activity>
+                    </conference-info>
+                </item>
+            </items>
+        </event>
+        <stanza-id xmlns="urn:xmpp:sid:0" id="4d3fd28f-6c9a-4723-b7e8-b17118027e83" by="ta@staging-muc.cryptowat.ch"/>
+    </message>
+
+
+
     it("is rendered as an info message",
             mock.initConverse(['chatBoxesFetched'], {}, async function (_converse) {
 

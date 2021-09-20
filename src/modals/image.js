@@ -2,8 +2,8 @@ import BootstrapModal from "plugins/modal/base.js";
 import tpl_image_modal from "./templates/image.js";
 
 
-export default BootstrapModal.extend({
-    id: 'image-modal',
+export default class ImageModal extends BootstrapModal {
+    id = 'image-modal';
 
     toHTML () {
         return tpl_image_modal({
@@ -11,4 +11,4 @@ export default BootstrapModal.extend({
             'onload': ev => (ev.target.parentElement.style.height = `${ev.target.height}px`)
         });
     }
-});
+}

@@ -8,15 +8,15 @@ const { Strophe, $iq, sizzle } = converse.env;
 const u = converse.env.utils;
 
 
-export default BootstrapModal.extend({
-    id: "muc-commands-modal",
+export default class MUCCommandsModal extends BootstrapModal {
+    id = "muc-commands-modal";
 
     initialize () {
         this.commands = [];
         BootstrapModal.prototype.initialize.apply(this, arguments);
         this.listenTo(this.model, 'change', this.render);
         this.getCommands();
-    },
+    }
 
     toHTML () {
         return tpl_muc_commands_modal(Object.assign(
@@ -26,12 +26,12 @@ export default BootstrapModal.extend({
                 'toggleCommandForm': ev => this.toggleCommandForm(ev)
             })
         );
-    },
+    }
 
     async getCommands () {
         this.commands = await api.adhoc.getCommands(Strophe.getDomainFromJid(this.model.get('jid')));
         this.render();
-    },
+    }
 
     async toggleCommandForm (ev) {
         ev.preventDefault();
@@ -41,9 +41,9 @@ export default BootstrapModal.extend({
         cmd.show_form = !cmd.show_form;
         cmd.show_form && await this.fetchCommandForm(cmd);
         this.render();
-    },
+    }
 
-    async fetchCommandForm (command) {
+    async fetchCommandForm (command) { // eslint-disable-line class-methods-use-this
         const node = command.node;
         const jid = command.jid;
         const stanza = $iq({
@@ -84,4 +84,4 @@ export default BootstrapModal.extend({
         </iq>
         */
     }
-});
+}

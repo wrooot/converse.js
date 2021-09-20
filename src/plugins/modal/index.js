@@ -2,6 +2,7 @@
  * @copyright The Converse.js contributors
  * @license Mozilla Public License (MPLv2)
  */
+import './container.js';
 import BootstrapModal from './base.js';
 import modal_api from './api.js';
 import { _converse, api, converse } from "@converse/headless/core";

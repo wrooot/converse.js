@@ -7,21 +7,21 @@ const u = converse.env.utils;
 const { Strophe } = converse.env;
 
 
-export default BootstrapModal.extend({
-    persistent: true,
-    id: 'add-chatroom-modal',
+export default class MessageVersionModal extends BootstrapModal {
+    persistent =  true;
+    id = 'add-chatroom-modal';
 
-    events: {
+    events =  {
         'submit form.add-chatroom': 'openChatRoom',
         'keyup .roomjid-input': 'checkRoomidPolicy',
         'change .roomjid-input': 'checkRoomidPolicy'
-    },
+    }
 
     initialize () {
         BootstrapModal.prototype.initialize.apply(this, arguments);
         this.listenTo(this.model, 'change:muc_domain', this.render);
         this.muc_roomid_policy_error_msg = null;
-    },
+    }
 
     toHTML () {
         let placeholder = '';
@@ -36,15 +36,15 @@ export default BootstrapModal.extend({
             'muc_roomid_policy_error_msg': this.muc_roomid_policy_error_msg,
             'muc_roomid_policy_hint': api.settings.get('muc_roomid_policy_hint')
         }));
-    },
+    }
 
     afterRender () {
         this.el.addEventListener('shown.bs.modal', () => {
             this.el.querySelector('input[name="chatroom"]').focus();
         }, false);
-    },
+    }
 
-    parseRoomDataFromEvent (form) {
+    parseRoomDataFromEvent (form) { // eslint-disable-line class-methods-use-this
         const data = new FormData(form);
         const jid = data.get('chatroom');
         let nick;
@@ -60,7 +60,7 @@ export default BootstrapModal.extend({
             'jid': jid,
             'nick': nick
         }
-    },
+    }
 
     openChatRoom (ev) {
         ev.preventDefault();
@@ -79,7 +79,7 @@ export default BootstrapModal.extend({
         api.rooms.open(jid, Object.assign(data, {jid}), true);
         this.modal.hide();
         ev.target.reset();
-    },
+    }
 
     checkRoomidPolicy () {
         if (api.settings.get('muc_roomid_policy') && api.settings.get('muc_domain')) {
@@ -98,4 +98,4 @@ export default BootstrapModal.extend({
             this.render();
         }
     }
-});
+}

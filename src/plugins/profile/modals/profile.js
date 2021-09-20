@@ -8,11 +8,11 @@ import { _converse, api, converse } from "@converse/headless/core";
 const { sizzle } = converse.env;
 
 
-const ProfileModal = BootstrapModal.extend({
-    id: "user-profile-modal",
-    events: {
+class ProfileModal extends BootstrapModal {
+    id =  "user-profile-modal";
+    events =  {
         'submit .profile-form': 'onFormSubmitted'
-    },
+    }
 
     initialize () {
         this.listenTo(this.model, 'change', this.render);
@@ -24,7 +24,7 @@ const ProfileModal = BootstrapModal.extend({
             * @example _converse.api.listen.on('profileModalInitialized', status => { ... });
             */
         api.trigger('profileModalInitialized', this.model);
-    },
+    }
 
     toHTML () {
         return tpl_profile_modal(Object.assign(
@@ -33,7 +33,7 @@ const ProfileModal = BootstrapModal.extend({
             this.getAvatarData(),
             { 'view': this }
         ));
-    },
+    }
 
     getAvatarData () {
         const image_type = this.model.vcard.get('image_type');
@@ -44,11 +44,11 @@ const ProfileModal = BootstrapModal.extend({
             'width': 128,
             image,
         };
-    },
+    }
 
     afterRender () {
         this.tabs = sizzle('.nav-item .nav-link', this.el).map(e => new bootstrap.Tab(e));
-    },
+    }
 
     async setVCard (data) {
         try {
@@ -62,7 +62,7 @@ const ProfileModal = BootstrapModal.extend({
             return;
         }
         this.modal.hide();
-    },
+    }
 
     onFormSubmitted (ev) {
         ev.preventDefault();
@@ -93,7 +93,7 @@ const ProfileModal = BootstrapModal.extend({
             reader.readAsBinaryString(image_file);
         }
     }
-});
+}
 
 _converse.ProfileModal = ProfileModal;
 

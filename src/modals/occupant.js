@@ -3,7 +3,7 @@ import tpl_occupant_modal from "./templates/occupant.js";
 import { _converse, api } from "@converse/headless/core";
 
 
-const OccupantModal = BootstrapModal.extend({
+class OccupantModal extends BootstrapModal {
 
     initialize () {
         BootstrapModal.prototype.initialize.apply(this, arguments);
@@ -15,7 +15,7 @@ const OccupantModal = BootstrapModal.extend({
          * @example _converse.api.listen.on('userDetailsModalInitialized', chatbox => { ... });
          */
         api.trigger('occupantModalInitialized', this.model);
-    },
+    }
 
     toHTML () {
         return tpl_occupant_modal(Object.assign(
@@ -25,7 +25,7 @@ const OccupantModal = BootstrapModal.extend({
                 'display_name': this.model.getDisplayName()
             }
         ));
-    },
+    }
 
     getAvatarData () {
         const vcard = _converse.vcards.findWhere({'jid': this.model.get('jid')});
@@ -39,7 +39,7 @@ const OccupantModal = BootstrapModal.extend({
             image,
         };
     }
-});
+}
 
 _converse.OccupantModal = OccupantModal;
 

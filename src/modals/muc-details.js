@@ -3,16 +3,16 @@ import tpl_muc_details from "./templates/muc-details.js";
 import { __ } from 'i18n';
 
 
-export default BootstrapModal.extend({
-    id: "muc-details-modal",
+export default class MUCDetailsModal extends BootstrapModal {
+    id = "muc-details-modal";
 
     initialize () {
-        BootstrapModal.prototype.initialize.apply(this, arguments);
+        super.initialize();
         this.listenTo(this.model, 'change', this.render);
         this.listenTo(this.model.features, 'change', this.render);
         this.listenTo(this.model.occupants, 'add', this.render);
         this.listenTo(this.model.occupants, 'change', this.render);
-    },
+    }
 
     toHTML () {
         return tpl_muc_details(Object.assign(
@@ -24,4 +24,4 @@ export default BootstrapModal.extend({
             })
         );
     }
-});
+}

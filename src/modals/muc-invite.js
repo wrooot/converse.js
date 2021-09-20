@@ -6,14 +6,14 @@ import { _converse, converse } from "@converse/headless/core";
 const u = converse.env.utils;
 
 
-export default BootstrapModal.extend({
-    id: "muc-invite-modal",
+export default class MUCInviteModal extends BootstrapModal {
+    id = "muc-invite-modal";
 
     initialize () {
         BootstrapModal.prototype.initialize.apply(this, arguments);
         this.listenTo(this.model, 'change', this.render);
         this.initInviteWidget();
-    },
+    }
 
     toHTML () {
         return tpl_muc_invite_modal(Object.assign(
@@ -21,19 +21,19 @@ export default BootstrapModal.extend({
                 'submitInviteForm': ev => this.submitInviteForm(ev)
             })
         );
-    },
+    }
 
     initInviteWidget () {
         if (this.invite_auto_complete) {
             this.invite_auto_complete.destroy();
         }
         const list = _converse.roster.map(i => ({'label': i.getDisplayName(), 'value': i.get('jid')}));
-        const el = this.el.querySelector('.suggestion-box').parentElement;
+        const el = this.querySelector('.suggestion-box').parentElement;
         this.invite_auto_complete = new _converse.AutoComplete(el, {
             'min_chars': 1,
             'list': list
         });
-    },
+    }
 
     submitInviteForm (ev) {
         ev.preventDefault();
@@ -49,4 +49,4 @@ export default BootstrapModal.extend({
             this.model.set({'invalid_invite_jid': true});
         }
     }
-});
+}

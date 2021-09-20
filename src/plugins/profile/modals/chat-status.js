@@ -6,12 +6,12 @@ import { _converse, converse } from "@converse/headless/core";
 const u = converse.env.utils;
 
 
-const ChatStatusModal = BootstrapModal.extend({
-    id: "modal-status-change",
-    events: {
+class ChatStatusModal extends BootstrapModal {
+    id =  "modal-status-change";
+    events =  {
         "submit form#set-xmpp-status": "onFormSubmitted",
         "click .clear-input": "clearStatusMessage"
-    },
+    }
 
     toHTML () {
         return tpl_chat_status_modal(
@@ -30,13 +30,13 @@ const ChatStatusModal = BootstrapModal.extend({
                 'modal_title': __('Change chat status'),
                 'placeholder_status_message': __('Personal status message')
             }));
-    },
+    }
 
     afterRender () {
         this.el.addEventListener('shown.bs.modal', () => {
             this.el.querySelector('input[name="status_message"]').focus();
         }, false);
-    },
+    }
 
     clearStatusMessage (ev) {
         if (ev && ev.preventDefault) {
@@ -45,7 +45,7 @@ const ChatStatusModal = BootstrapModal.extend({
         }
         const roster_filter = this.el.querySelector('input[name="status_message"]');
         roster_filter.value = '';
-    },
+    }
 
     onFormSubmitted (ev) {
         ev.preventDefault();
@@ -56,7 +56,7 @@ const ChatStatusModal = BootstrapModal.extend({
         });
         this.modal.hide();
     }
-});
+}
 
 
 _converse.ChatStatusModal = ChatStatusModal;

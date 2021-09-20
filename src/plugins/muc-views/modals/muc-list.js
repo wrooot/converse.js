@@ -65,9 +65,9 @@ function toggleRoomInfo (ev) {
 }
 
 
-export default BootstrapModal.extend({
-    id: "muc-list-modal",
-    persistent: true,
+export default class MUCListModal extends BootstrapModal {
+    id = "muc-list-modal";
+    persistent = true;
 
     initialize () {
         this.items = [];
@@ -83,7 +83,7 @@ export default BootstrapModal.extend({
           ? this.updateRoomsList()
           : this.el.querySelector('input[name="server"]').focus()
         );
-    },
+    }
 
     toHTML () {
         const muc_domain = this.model.get('muc_domain') || api.settings.get('muc_domain');
@@ -98,7 +98,7 @@ export default BootstrapModal.extend({
                 'submitForm': ev => this.showRooms(ev),
                 'toggleRoomInfo': ev => this.toggleRoomInfo(ev)
             }));
-    },
+    }
 
     openRoom (ev) {
         ev.preventDefault();
@@ -106,16 +106,16 @@ export default BootstrapModal.extend({
         const name = ev.target.getAttribute('data-room-name');
         this.modal.hide();
         api.rooms.open(jid, {'name': name}, true);
-    },
+    }
 
-    toggleRoomInfo (ev) {
+    toggleRoomInfo (ev) { // eslint-disable-line
         ev.preventDefault();
         toggleRoomInfo(ev);
-    },
+    }
 
     onDomainChange () {
         api.settings.get('auto_list_rooms') && this.updateRoomsList();
-    },
+    }
 
     /**
      * Handle the IQ stanza returned from the server, containing
@@ -136,7 +136,7 @@ export default BootstrapModal.extend({
         }
         this.render();
         return true;
-    },
+    }
 
     /**
      * Send an IQ stanza to the server asking for all groupchats
@@ -152,7 +152,7 @@ export default BootstrapModal.extend({
         api.sendIQ(iq)
             .then(iq => this.onRoomsFound(iq))
             .catch(() => this.onRoomsFound())
-    },
+    }
 
     showRooms (ev) {
         ev.preventDefault();
@@ -162,13 +162,13 @@ export default BootstrapModal.extend({
         const data = new FormData(ev.target);
         this.model.setDomain(data.get('server'));
         this.updateRoomsList();
-    },
+    }
 
     setDomainFromEvent (ev) {
         this.model.setDomain(ev.target.value);
-    },
+    }
 
     setNick (ev) {
         this.model.save({nick: ev.target.value});
     }
-});
+}

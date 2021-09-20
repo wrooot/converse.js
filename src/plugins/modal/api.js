@@ -1,6 +1,7 @@
 import Alert from './alert.js';
 import Confirm from './confirm.js';
 import { Model } from '@converse/skeletor/src/model.js';
+import ModalFactory from './factory.js';
 
 let modals = [];
 
@@ -22,8 +23,8 @@ const modal_api = {
          *  found).
          * @param { Event } [event] - The DOM event that causes the modal to be shown.
          */
-        show (ModalClass, properties, ev) {
-            const modal = this.get(ModalClass.id) || this.create(ModalClass, properties);
+        show (name, properties, ev) {
+            const modal = this.get(name) || this.create(name, properties);
             modal.show(ev);
             return modal;
         },
@@ -33,7 +34,7 @@ const modal_api = {
          * @param { String } id
          */
         get (id) {
-            return modals.filter(m => m.id == id).pop();
+            return id ? modals.filter(m => m.id == id).pop() : modals;
         },
 
         /**
@@ -42,10 +43,8 @@ const modal_api = {
          * @param { Object } [properties] - Optional properties that will be
          *  set on the modal instance.
          */
-        create (ModalClass, properties) {
-            const modal = new ModalClass(properties);
-            modals.push(modal);
-            return modal;
+        create (name, properties) {
+            modals.push(new ModalFactory(name, properties));
         },
 
         /**

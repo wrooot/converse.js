@@ -37,7 +37,7 @@ export default class ChatHeading extends CustomElement {
 
     showUserDetailsModal (ev) {
         ev.preventDefault();
-        api.modal.show(UserDetailsModal, { model: this.model }, ev);
+        api.modal.show('converse-user-details-modal', { model: this.model }, ev);
     }
 
     close (ev) {
